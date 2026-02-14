@@ -45,36 +45,67 @@ const FeatureCard = ({ feature, index, side }: { feature: Feature; index: number
   </motion.div>
 );
 
-const ConnectorLines = ({ side }: { side: "left" | "right" }) => {
+const AnimatedConnector = ({ side }: { side: "left" | "right" }) => {
   const isLeft = side === "left";
   return (
     <svg
       className="absolute top-0 hidden h-full lg:block"
       style={{
-        [isLeft ? "right" : "left"]: "-30px",
-        width: "60px",
+        [isLeft ? "right" : "left"]: "-50px",
+        width: "100px",
       }}
-      viewBox="0 0 60 500"
+      viewBox="0 0 100 500"
       preserveAspectRatio="none"
       fill="none"
     >
       {[0, 1, 2, 3, 4].map((i) => {
         const y = 50 + i * 100;
+        const startX = isLeft ? 0 : 100;
+        const endX = isLeft ? 100 : 0;
+        const midX = 50;
+        const path = `M ${startX} ${y} Q ${midX} ${y} ${endX} 250`;
         return (
-          <line
-            key={i}
-            x1={isLeft ? 0 : 60}
-            y1={y}
-            x2={isLeft ? 60 : 0}
-            y2={250}
-            stroke="hsl(211 65% 47% / 0.2)"
-            strokeWidth="1.5"
-            strokeDasharray="6 4"
-            className="animate-dash-flow"
-            style={{ animationDelay: `${i * 0.3}s` }}
-          />
+          <g key={i}>
+            {/* Thick background line */}
+            <path
+              d={path}
+              stroke="hsl(var(--primary) / 0.12)"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* Animated dashed line on top */}
+            <path
+              d={path}
+              stroke="hsl(var(--primary) / 0.35)"
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="8 12"
+              strokeLinecap="round"
+              className="animate-dash-flow"
+              style={{ animationDelay: `${i * 0.4}s` }}
+            />
+            {/* Animated dot traveling along path */}
+            <circle r="4" fill="hsl(var(--primary))">
+              <animateMotion
+                dur={`${2.5 + i * 0.3}s`}
+                repeatCount="indefinite"
+                begin={`${i * 0.5}s`}
+              >
+                <mpath href={`#connector-${side}-${i}`} />
+              </animateMotion>
+            </circle>
+            <path id={`connector-${side}-${i}`} d={path} fill="none" />
+            {/* Static dots at endpoints */}
+            <circle cx={startX} cy={y} r="5" fill="hsl(var(--primary) / 0.2)" />
+            <circle cx={startX} cy={y} r="3" fill="hsl(var(--primary))" />
+            {/* Glow dot at center */}
+            <circle cx={endX} cy={250} r="6" fill="hsl(var(--primary) / 0.15)" />
+          </g>
         );
       })}
+      {/* Center endpoint big dot */}
+      <circle cx={isLeft ? 100 : 0} cy={250} r="5" fill="hsl(var(--primary))" />
     </svg>
   );
 };
@@ -82,16 +113,14 @@ const ConnectorLines = ({ side }: { side: "left" | "right" }) => {
 const ArchitectureSection = () => {
   return (
     <section id="features" className="section-gray relative py-20 sm:py-28">
-      {/* Subtle grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-40"
         style={{
-          backgroundImage: `radial-gradient(circle, hsl(211 65% 47% / 0.04) 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle, hsl(var(--primary) / 0.04) 1px, transparent 1px)`,
           backgroundSize: "24px 24px",
         }}
       />
 
       <div className="container mx-auto max-w-6xl px-4">
-        {/* Section header */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -102,17 +131,14 @@ const ArchitectureSection = () => {
           <p className="text-muted-foreground">Everything connects through Dwamee's intelligent workforce hub</p>
         </motion.div>
 
-        {/* Hub layout */}
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
-          {/* Left features */}
           <div className="relative space-y-4">
             {leftFeatures.map((f, i) => (
               <FeatureCard key={i} feature={f} index={i} side="left" />
             ))}
-            <ConnectorLines side="left" />
+            <AnimatedConnector side="left" />
           </div>
 
-          {/* Center hub */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -121,14 +147,12 @@ const ArchitectureSection = () => {
             className="flex justify-center"
           >
             <div className="relative">
-              {/* Glow rings */}
               <div className="absolute -inset-6 rounded-full animate-pulse-glow"
-                style={{ background: "radial-gradient(circle, hsl(211 65% 47% / 0.1) 0%, transparent 70%)" }}
+                style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)" }}
               />
               <div className="absolute -inset-12 rounded-full"
-                style={{ background: "radial-gradient(circle, hsl(211 65% 47% / 0.04) 0%, transparent 70%)" }}
+                style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.04) 0%, transparent 70%)" }}
               />
-              {/* Logo circle */}
               <div className="glow-circle relative z-10 flex h-32 w-32 items-center justify-center rounded-full bg-card border-2 border-primary/20 sm:h-40 sm:w-40">
                 <div className="text-center">
                   <p className="text-2xl font-extrabold gradient-text sm:text-3xl">D</p>
@@ -138,9 +162,8 @@ const ArchitectureSection = () => {
             </div>
           </motion.div>
 
-          {/* Right features */}
           <div className="relative space-y-4">
-            <ConnectorLines side="right" />
+            <AnimatedConnector side="right" />
             {rightFeatures.map((f, i) => (
               <FeatureCard key={i} feature={f} index={i} side="right" />
             ))}
