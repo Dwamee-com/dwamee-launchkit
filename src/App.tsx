@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import InitCheckout from "./pages/InitCheckout";
 import DashboardLayout from "./components/DashboardLayout";
 import Branches from "./pages/dashboard/Branches";
 import Places from "./pages/dashboard/Places";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/checkout" element={<InitCheckout />} />
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="branches" element={<Branches />} />
             <Route path="places" element={<Places />} />
