@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Building2 } from "lucide-react";
 
 const companies = [
   { name: "Aramco", initials: "AR" },
@@ -16,9 +15,12 @@ const companies = [
   { name: "Nahdi Medical", initials: "NM" },
 ];
 
+// Double the array for seamless infinite scroll
+const scrollCompanies = [...companies, ...companies];
+
 const TrustedSection = () => {
   return (
-    <section className="relative py-20 sm:py-28 bg-background">
+    <section className="relative py-20 sm:py-28 bg-background overflow-hidden">
       <div className="container mx-auto max-w-5xl px-4">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -31,26 +33,33 @@ const TrustedSection = () => {
           </h2>
           <p className="text-muted-foreground">Organizations that rely on Dwamee for workforce management</p>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {companies.map((company, i) => (
+      {/* Infinite scrolling row */}
+      <div className="relative">
+        {/* Gradient fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+
+        <motion.div
+          className="flex gap-5 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        >
+          {scrollCompanies.map((company, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-              whileHover={{ scale: 1.05, y: -4 }}
-              className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-5 cursor-default transition-all hover:border-primary/30 hover:shadow-md"
+              whileHover={{ scale: 1.08, y: -6 }}
+              className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-5 w-[140px] shrink-0 cursor-default transition-all hover:border-primary/30 hover:shadow-md"
               style={{ boxShadow: "var(--shadow-neu)" }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/8 border border-primary/15">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/15">
                 <span className="text-sm font-extrabold text-primary">{company.initials}</span>
               </div>
               <span className="text-xs font-semibold text-foreground text-center leading-tight">{company.name}</span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
