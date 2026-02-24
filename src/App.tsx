@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import InitCheckout from "./pages/InitCheckout";
 import DashboardLayout from "./components/DashboardLayout";
 import Branches from "./pages/dashboard/Branches";
 import Places from "./pages/dashboard/Places";
