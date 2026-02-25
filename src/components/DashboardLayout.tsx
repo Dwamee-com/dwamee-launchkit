@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, LogOut } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut } from "lucide-react";
 
 const menuItems = [
   { title: "Branches", url: "/dashboard/branches", icon: GitBranch },
@@ -20,6 +20,8 @@ const menuItems = [
   { title: "Groups", url: "/dashboard/groups", icon: Users },
   { title: "Fields", url: "/dashboard/fields", icon: Layers },
   { title: "Assignments", url: "/dashboard/assignments", icon: CreditCard },
+  { title: "Salaries", url: "/dashboard/salaries", icon: Wallet },
+  { title: "Daily Report", url: "/dashboard/daily-report", icon: FileBarChart },
 ];
 
 export default function DashboardLayout() {
