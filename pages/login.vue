@@ -13,6 +13,7 @@ const router = useRouter()
 const phone = ref('')
 const password = ref('')
 
+
 const floatingShapes = [
   { delay: 0, x: '10%', y: '15%', size: 60, rotate: 12 },
   { delay: 1.5, x: '70%', y: '10%', size: 40, rotate: -8 },
