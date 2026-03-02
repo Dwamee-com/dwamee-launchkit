@@ -10,7 +10,7 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { Search, Download, TrendingUp, TrendingDown, Clock, Filter } from "lucide-react";
+import { Search, Download, TrendingUp, TrendingDown, Clock, Filter, ArrowUpRight, ArrowDownRight } from "lucide-react";
 
 const mockReport = [
   { id: 1, name: "Ahmed Hassan", date: "2026-02-25", checkIn: "08:02", checkOut: "17:00", status: "On Time", type: "bonus", amount: 50, reason: "Early check-in incentive" },
@@ -23,11 +23,11 @@ const mockReport = [
   { id: 8, name: "Dina Samir", date: "2026-02-24", checkIn: "09:15", checkOut: "17:00", status: "Late", type: "deduction", amount: 150, reason: "Late arrival (1h 15m)" },
 ];
 
-const statusColors: Record<string, string> = {
-  "On Time": "bg-accent/10 text-accent border-0",
-  "Late": "bg-destructive/10 text-destructive border-0",
-  "Absent": "bg-destructive/10 text-destructive border-0",
-  "Early Leave": "bg-primary/10 text-primary border-0",
+const statusConfig: Record<string, { bg: string; text: string; dot: string }> = {
+  "On Time": { bg: "bg-accent/10", text: "text-accent", dot: "bg-accent" },
+  "Late": { bg: "bg-destructive/10", text: "text-destructive", dot: "bg-destructive" },
+  "Absent": { bg: "bg-destructive/10", text: "text-destructive", dot: "bg-destructive" },
+  "Early Leave": { bg: "bg-primary/10", text: "text-primary", dot: "bg-primary" },
 };
 
 export default function DailyReport() {
@@ -47,33 +47,37 @@ export default function DailyReport() {
 
   return (
     <div>
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Daily Bonus & Deduction Report</h1>
-          <p className="text-muted-foreground text-sm">Track daily attendance rewards and penalties</p>
+          <h1 className="text-2xl font-bold text-foreground">Daily Report</h1>
+          <p className="text-muted-foreground text-sm">Attendance bonuses & deductions</p>
         </div>
-        <Button variant="outline" size="sm" className="gap-1.5">
+        <Button variant="outline" size="sm" className="gap-1.5 rounded-xl">
           <Download className="w-4 h-4" /> Export
         </Button>
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         {[
-          { label: "Total Bonuses", value: `+$${totalBonus}`, icon: TrendingUp, color: "text-accent", bg: "bg-accent/10" },
-          { label: "Total Deductions", value: `-$${totalDeduction}`, icon: TrendingDown, color: "text-destructive", bg: "bg-destructive/10" },
-          { label: "Records", value: filtered.length, icon: Clock, color: "text-primary", bg: "bg-primary/10" },
-        ].map((s) => (
-          <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <Card>
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
-                  <s.icon className={`w-5 h-5 ${s.color}`} />
+          { label: "Total Bonuses", value: `+$${totalBonus}`, icon: TrendingUp, color: "text-accent", bg: "bg-gradient-to-br from-accent/10 to-accent/5", arrow: ArrowUpRight },
+          { label: "Total Deductions", value: `-$${totalDeduction}`, icon: TrendingDown, color: "text-destructive", bg: "bg-gradient-to-br from-destructive/10 to-destructive/5", arrow: ArrowDownRight },
+          { label: "Records", value: filtered.length, icon: Clock, color: "text-primary", bg: "bg-gradient-to-br from-primary/10 to-primary/5", arrow: null },
+        ].map((s, i) => (
+          <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+            <Card className="overflow-hidden">
+              <CardContent className="p-5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center`}>
+                    <s.icon className={`w-5 h-5 ${s.color}`} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
+                    <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">{s.label}</p>
-                  <p className={`text-lg font-bold ${s.color}`}>{s.value}</p>
-                </div>
+                {s.arrow && <s.arrow className={`w-5 h-5 ${s.color} opacity-40`} />}
               </CardContent>
             </Card>
           </motion.div>
@@ -86,11 +90,11 @@ export default function DailyReport() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative flex-1 min-w-[180px] max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search employee..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 h-9" />
+              <Input placeholder="Search employee..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 h-9 rounded-xl" />
             </div>
-            <Input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className="w-[160px] h-9" />
+            <Input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className="w-[160px] h-9 rounded-xl" />
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="w-[140px] h-9">
+              <SelectTrigger className="w-[140px] h-9 rounded-xl">
                 <Filter className="w-3.5 h-3.5 mr-1.5" />
                 <SelectValue />
               </SelectTrigger>
@@ -106,46 +110,59 @@ export default function DailyReport() {
 
       {/* Table */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-        <Card>
+        <Card className="overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/50">
-                <TableHead>Employee</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Check In</TableHead>
-                <TableHead>Check Out</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Reason</TableHead>
+                <TableHead className="font-semibold">Employee</TableHead>
+                <TableHead className="font-semibold">Date</TableHead>
+                <TableHead className="font-semibold">In</TableHead>
+                <TableHead className="font-semibold">Out</TableHead>
+                <TableHead className="font-semibold">Status</TableHead>
+                <TableHead className="font-semibold">Type</TableHead>
+                <TableHead className="font-semibold text-right">Amount</TableHead>
+                <TableHead className="font-semibold">Reason</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filtered.map((row) => (
-                <TableRow key={row.id} className="hover:bg-muted/30">
-                  <TableCell className="font-medium text-foreground">{row.name}</TableCell>
-                  <TableCell className="text-muted-foreground text-xs">{row.date}</TableCell>
-                  <TableCell className="font-mono text-xs">{row.checkIn}</TableCell>
-                  <TableCell className="font-mono text-xs">{row.checkOut}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className={`text-[10px] ${statusColors[row.status] || ""}`}>
-                      {row.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={row.type === "bonus" ? "default" : "destructive"} className="text-[10px]">
-                      {row.type === "bonus" ? "Bonus" : "Deduction"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className={`font-semibold ${row.type === "bonus" ? "text-accent" : "text-destructive"}`}>
-                    {row.type === "bonus" ? "+" : "-"}${row.amount}
-                  </TableCell>
-                  <TableCell className="text-xs text-muted-foreground max-w-[200px] truncate">{row.reason}</TableCell>
-                </TableRow>
-              ))}
+              {filtered.map((row, i) => {
+                const sc = statusConfig[row.status] || statusConfig["On Time"];
+                return (
+                  <motion.tr
+                    key={row.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: i * 0.03 }}
+                    className="hover:bg-muted/30 border-b border-border"
+                  >
+                    <TableCell className="font-semibold text-foreground">{row.name}</TableCell>
+                    <TableCell className="text-muted-foreground text-xs font-mono">{row.date}</TableCell>
+                    <TableCell className="font-mono text-xs">{row.checkIn}</TableCell>
+                    <TableCell className="font-mono text-xs">{row.checkOut}</TableCell>
+                    <TableCell>
+                      <span className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full ${sc.bg} ${sc.text}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${sc.dot}`} />
+                        {row.status}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={row.type === "bonus" ? "default" : "destructive"}
+                        className="text-[10px] rounded-full"
+                      >
+                        {row.type === "bonus" ? "Bonus" : "Deduction"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className={`font-bold text-right ${row.type === "bonus" ? "text-accent" : "text-destructive"}`}>
+                      {row.type === "bonus" ? "+" : "-"}${row.amount}
+                    </TableCell>
+                    <TableCell className="text-xs text-muted-foreground max-w-[200px] truncate">{row.reason}</TableCell>
+                  </motion.tr>
+                );
+              })}
               {filtered.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center py-10 text-muted-foreground">
+                  <TableCell colSpan={8} className="text-center py-16 text-muted-foreground">
                     No records found
                   </TableCell>
                 </TableRow>
