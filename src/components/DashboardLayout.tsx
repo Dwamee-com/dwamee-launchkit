@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
 import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut } from "lucide-react";
+import HelpCenter from "@/components/HelpCenter";
 
 const menuItems = [
   { title: "Branches", url: "/dashboard/branches", icon: GitBranch },
