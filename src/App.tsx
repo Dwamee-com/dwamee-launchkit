@@ -19,6 +19,11 @@ import Assignments from "./pages/dashboard/Assignments";
 import MonthlySalaries from "./pages/dashboard/MonthlySalaries";
 import SalaryDetails from "./pages/dashboard/SalaryDetails";
 import DailyReport from "./pages/dashboard/DailyReport";
+import Projects from "./pages/dashboard/Projects";
+import ProjectDetails from "./pages/dashboard/ProjectDetails";
+import ModuleDetails from "./pages/dashboard/ModuleDetails";
+import KanbanBoard from "./pages/dashboard/KanbanBoard";
+import TaskTracker from "./pages/dashboard/TaskTracker";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +49,11 @@ const App = () => (
             <Route path="salaries" element={<MonthlySalaries />} />
             <Route path="salary-details/:year/:month" element={<SalaryDetails />} />
             <Route path="daily-report" element={<DailyReport />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="projects/:projectId" element={<ProjectDetails />} />
+            <Route path="projects/:projectId/modules/:moduleId" element={<ModuleDetails />} />
+            <Route path="kanban" element={<KanbanBoard />} />
+            <Route path="tracker" element={<TaskTracker />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
