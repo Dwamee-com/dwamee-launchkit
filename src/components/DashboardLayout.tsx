@@ -25,6 +25,12 @@ const projectItems = [
   { title: "Task Tracker", url: "/dashboard/tracker", icon: Activity },
 ];
 
+const leaveItems = [
+  { title: "Leave Types", url: "/dashboard/leave-types", icon: CalendarDays },
+  { title: "Leave Requests", url: "/dashboard/leave-requests", icon: ClipboardList },
+  { title: "Employee Comparison", url: "/dashboard/employee-comparison", icon: UserCheck },
+];
+
 export default function DashboardLayout() {
   const navigate = useNavigate();
 
