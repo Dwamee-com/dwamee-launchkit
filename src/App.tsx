@@ -57,6 +57,9 @@ const App = () => (
             <Route path="projects/:projectId/modules/:moduleId" element={<ModuleDetails />} />
             <Route path="kanban" element={<KanbanBoard />} />
             <Route path="tracker" element={<TaskTracker />} />
+            <Route path="leave-types" element={<LeaveTypes />} />
+            <Route path="leave-requests" element={<LeaveRequests />} />
+            <Route path="employee-comparison" element={<EmployeeComparison />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

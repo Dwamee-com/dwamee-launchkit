@@ -77,6 +77,23 @@ export default function DashboardLayout() {
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Leave & Attendance</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {leaveItems.map((item) => (
+                      <SidebarMenuItem key={item.title}>
+                        <SidebarMenuButton asChild>
+                          <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
+                            <item.icon className="mr-2 h-4 w-4" />
+                            <span>{item.title}</span>
+                          </NavLink>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
             </SidebarContent>
             <div className="mt-auto p-4 border-t border-sidebar-border">
               <button onClick={() => navigate("/login")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">
