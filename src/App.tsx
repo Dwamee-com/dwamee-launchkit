@@ -24,6 +24,9 @@ import ProjectDetails from "./pages/dashboard/ProjectDetails";
 import ModuleDetails from "./pages/dashboard/ModuleDetails";
 import KanbanBoard from "./pages/dashboard/KanbanBoard";
 import TaskTracker from "./pages/dashboard/TaskTracker";
+import LeaveTypes from "./pages/dashboard/LeaveTypes";
+import LeaveRequests from "./pages/dashboard/LeaveRequests";
+import EmployeeComparison from "./pages/dashboard/EmployeeComparison";
 
 const queryClient = new QueryClient();
 
