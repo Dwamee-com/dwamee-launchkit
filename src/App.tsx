@@ -24,6 +24,9 @@ import ProjectDetails from "./pages/dashboard/ProjectDetails";
 import ModuleDetails from "./pages/dashboard/ModuleDetails";
 import KanbanBoard from "./pages/dashboard/KanbanBoard";
 import TaskTracker from "./pages/dashboard/TaskTracker";
+import LeaveTypes from "./pages/dashboard/LeaveTypes";
+import LeaveRequests from "./pages/dashboard/LeaveRequests";
+import EmployeeComparison from "./pages/dashboard/EmployeeComparison";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +57,9 @@ const App = () => (
             <Route path="projects/:projectId/modules/:moduleId" element={<ModuleDetails />} />
             <Route path="kanban" element={<KanbanBoard />} />
             <Route path="tracker" element={<TaskTracker />} />
+            <Route path="leave-types" element={<LeaveTypes />} />
+            <Route path="leave-requests" element={<LeaveRequests />} />
+            <Route path="employee-comparison" element={<EmployeeComparison />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

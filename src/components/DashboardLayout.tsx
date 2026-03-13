@@ -4,7 +4,7 @@ import {
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck } from "lucide-react";
 import HelpCenter from "@/components/HelpCenter";
 import OnboardingTour from "@/components/OnboardingTour";
 import { ProjectProvider } from "@/contexts/ProjectContext";
@@ -23,6 +23,12 @@ const projectItems = [
   { title: "Projects", url: "/dashboard/projects", icon: FolderKanban },
   { title: "Kanban Board", url: "/dashboard/kanban", icon: LayoutGrid },
   { title: "Task Tracker", url: "/dashboard/tracker", icon: Activity },
+];
+
+const leaveItems = [
+  { title: "Leave Types", url: "/dashboard/leave-types", icon: CalendarDays },
+  { title: "Leave Requests", url: "/dashboard/leave-requests", icon: ClipboardList },
+  { title: "Employee Comparison", url: "/dashboard/employee-comparison", icon: UserCheck },
 ];
 
 export default function DashboardLayout() {
@@ -59,6 +65,23 @@ export default function DashboardLayout() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {projectItems.map((item) => (
+                      <SidebarMenuItem key={item.title}>
+                        <SidebarMenuButton asChild>
+                          <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
+                            <item.icon className="mr-2 h-4 w-4" />
+                            <span>{item.title}</span>
+                          </NavLink>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Leave & Attendance</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {leaveItems.map((item) => (
                       <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton asChild>
                           <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
