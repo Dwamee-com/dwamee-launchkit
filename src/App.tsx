@@ -27,6 +27,8 @@ import TaskTracker from "./pages/dashboard/TaskTracker";
 import LeaveTypes from "./pages/dashboard/LeaveTypes";
 import LeaveRequests from "./pages/dashboard/LeaveRequests";
 import EmployeeComparison from "./pages/dashboard/EmployeeComparison";
+import Statistics from "./pages/dashboard/Statistics";
+import EmployeeProfile from "./pages/dashboard/EmployeeProfile";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +62,8 @@ const App = () => (
             <Route path="leave-types" element={<LeaveTypes />} />
             <Route path="leave-requests" element={<LeaveRequests />} />
             <Route path="employee-comparison" element={<EmployeeComparison />} />
+            <Route path="statistics" element={<Statistics />} />
+            <Route path="employee/:employeeId" element={<EmployeeProfile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
