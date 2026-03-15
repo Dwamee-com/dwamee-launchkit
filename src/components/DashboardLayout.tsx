@@ -4,35 +4,60 @@ import {
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User } from "lucide-react";
 import HelpCenter from "@/components/HelpCenter";
 import OnboardingTour from "@/components/OnboardingTour";
 import { ProjectProvider } from "@/contexts/ProjectContext";
 
 const managementItems = [
-  { title: "Branches", url: "/dashboard/branches", icon: GitBranch },
-  { title: "Places", url: "/dashboard/places", icon: MapPin },
-  { title: "Groups", url: "/dashboard/groups", icon: Users },
-  { title: "Fields", url: "/dashboard/fields", icon: Layers },
+  { title: "Branches", url: "/dashboard/branches", icon: GitBranch, tour: "branches" },
+  { title: "Places", url: "/dashboard/places", icon: MapPin, tour: "places" },
+  { title: "Groups", url: "/dashboard/groups", icon: Users, tour: "groups" },
+  { title: "Fields", url: "/dashboard/fields", icon: Layers, tour: "fields" },
   { title: "Assignments", url: "/dashboard/assignments", icon: CreditCard },
   { title: "Salaries", url: "/dashboard/salaries", icon: Wallet },
   { title: "Daily Report", url: "/dashboard/daily-report", icon: FileBarChart },
 ];
 
 const projectItems = [
-  { title: "Projects", url: "/dashboard/projects", icon: FolderKanban },
-  { title: "Kanban Board", url: "/dashboard/kanban", icon: LayoutGrid },
+  { title: "Projects", url: "/dashboard/projects", icon: FolderKanban, tour: "projects" },
+  { title: "Kanban Board", url: "/dashboard/kanban", icon: LayoutGrid, tour: "kanban" },
   { title: "Task Tracker", url: "/dashboard/tracker", icon: Activity },
 ];
 
 const leaveItems = [
-  { title: "Leave Types", url: "/dashboard/leave-types", icon: CalendarDays },
+  { title: "Leave Types", url: "/dashboard/leave-types", icon: CalendarDays, tour: "leave-types" },
   { title: "Leave Requests", url: "/dashboard/leave-requests", icon: ClipboardList },
   { title: "Employee Comparison", url: "/dashboard/employee-comparison", icon: UserCheck },
 ];
 
+const analyticsItems = [
+  { title: "Statistics", url: "/dashboard/statistics", icon: BarChart3 },
+  { title: "Employee Profile", url: "/dashboard/employee/1", icon: User },
+];
+
 export default function DashboardLayout() {
   const navigate = useNavigate();
+
+  const renderMenu = (items: typeof managementItems) => (
+    <SidebarMenu>
+      {items.map((item) => (
+        <SidebarMenuItem key={item.title}>
+          <SidebarMenuButton asChild>
+            <NavLink
+              to={item.url}
+              className="hover:bg-muted/50"
+              activeClassName="bg-muted text-primary font-medium"
+              {...("tour" in item && item.tour ? { "data-tour": item.tour } : {})}
+            >
+              <item.icon className="mr-2 h-4 w-4" />
+              <span>{item.title}</span>
+            </NavLink>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  );
 
   return (
     <ProjectProvider>
@@ -45,54 +70,19 @@ export default function DashboardLayout() {
             <SidebarContent>
               <SidebarGroup>
                 <SidebarGroupLabel>Management</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {managementItems.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild>
-                          <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
-                            <item.icon className="mr-2 h-4 w-4" />
-                            <span>{item.title}</span>
-                          </NavLink>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
+                <SidebarGroupContent>{renderMenu(managementItems)}</SidebarGroupContent>
               </SidebarGroup>
               <SidebarGroup>
                 <SidebarGroupLabel>Project Management</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {projectItems.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild>
-                          <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
-                            <item.icon className="mr-2 h-4 w-4" />
-                            <span>{item.title}</span>
-                          </NavLink>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
+                <SidebarGroupContent>{renderMenu(projectItems)}</SidebarGroupContent>
               </SidebarGroup>
               <SidebarGroup>
                 <SidebarGroupLabel>Leave & Attendance</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {leaveItems.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild>
-                          <NavLink to={item.url} className="hover:bg-muted/50" activeClassName="bg-muted text-primary font-medium">
-                            <item.icon className="mr-2 h-4 w-4" />
-                            <span>{item.title}</span>
-                          </NavLink>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
+                <SidebarGroupContent>{renderMenu(leaveItems)}</SidebarGroupContent>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Analytics</SidebarGroupLabel>
+                <SidebarGroupContent>{renderMenu(analyticsItems)}</SidebarGroupContent>
               </SidebarGroup>
             </SidebarContent>
             <div className="mt-auto p-4 border-t border-sidebar-border">
