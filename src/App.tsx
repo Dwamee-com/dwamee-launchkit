@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
@@ -69,6 +69,8 @@ const App = () => (
             <Route path="notification-config" element={<NotificationConfig />} />
             <Route path="notifications" element={<Notifications />} />
           </Route>
+          <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
+          <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
