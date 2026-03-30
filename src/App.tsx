@@ -29,6 +29,8 @@ import LeaveRequests from "./pages/dashboard/LeaveRequests";
 import EmployeeComparison from "./pages/dashboard/EmployeeComparison";
 import Statistics from "./pages/dashboard/Statistics";
 import EmployeeProfile from "./pages/dashboard/EmployeeProfile";
+import NotificationConfig from "./pages/dashboard/NotificationConfig";
+import Notifications from "./pages/dashboard/Notifications";
 
 const queryClient = new QueryClient();
 
