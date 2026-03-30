@@ -36,6 +36,11 @@ const analyticsItems = [
   { title: "Employee Profile", url: "/dashboard/employee/1", icon: User },
 ];
 
+const notificationItems = [
+  { title: "Notifications", url: "/dashboard/notifications", icon: Bell },
+  { title: "Notification Config", url: "/dashboard/notification-config", icon: Settings },
+];
+
 export default function DashboardLayout() {
   const navigate = useNavigate();
 
