@@ -69,6 +69,8 @@ const App = () => (
             <Route path="notification-config" element={<NotificationConfig />} />
             <Route path="notifications" element={<Notifications />} />
           </Route>
+          <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
+          <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
