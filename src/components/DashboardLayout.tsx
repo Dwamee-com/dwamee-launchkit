@@ -89,6 +89,10 @@ export default function DashboardLayout() {
                 <SidebarGroupLabel>Analytics</SidebarGroupLabel>
                 <SidebarGroupContent>{renderMenu(analyticsItems)}</SidebarGroupContent>
               </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Notifications</SidebarGroupLabel>
+                <SidebarGroupContent>{renderMenu(notificationItems)}</SidebarGroupContent>
+              </SidebarGroup>
             </SidebarContent>
             <div className="mt-auto p-4 border-t border-sidebar-border">
               <button onClick={() => navigate("/login")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">

@@ -66,6 +66,8 @@ const App = () => (
             <Route path="employee-comparison" element={<EmployeeComparison />} />
             <Route path="statistics" element={<Statistics />} />
             <Route path="employee/:employeeId" element={<EmployeeProfile />} />
+            <Route path="notification-config" element={<NotificationConfig />} />
+            <Route path="notifications" element={<Notifications />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
