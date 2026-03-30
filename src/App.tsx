@@ -29,6 +29,8 @@ import LeaveRequests from "./pages/dashboard/LeaveRequests";
 import EmployeeComparison from "./pages/dashboard/EmployeeComparison";
 import Statistics from "./pages/dashboard/Statistics";
 import EmployeeProfile from "./pages/dashboard/EmployeeProfile";
+import NotificationConfig from "./pages/dashboard/NotificationConfig";
+import Notifications from "./pages/dashboard/Notifications";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +66,8 @@ const App = () => (
             <Route path="employee-comparison" element={<EmployeeComparison />} />
             <Route path="statistics" element={<Statistics />} />
             <Route path="employee/:employeeId" element={<EmployeeProfile />} />
+            <Route path="notification-config" element={<NotificationConfig />} />
+            <Route path="notifications" element={<Notifications />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

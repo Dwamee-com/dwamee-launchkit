@@ -4,7 +4,7 @@ import {
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User, Bell, Settings } from "lucide-react";
 import HelpCenter from "@/components/HelpCenter";
 import OnboardingTour from "@/components/OnboardingTour";
 import { ProjectProvider } from "@/contexts/ProjectContext";
@@ -34,6 +34,11 @@ const leaveItems = [
 const analyticsItems = [
   { title: "Statistics", url: "/dashboard/statistics", icon: BarChart3 },
   { title: "Employee Profile", url: "/dashboard/employee/1", icon: User },
+];
+
+const notificationItems = [
+  { title: "Notifications", url: "/dashboard/notifications", icon: Bell },
+  { title: "Notification Config", url: "/dashboard/notification-config", icon: Settings },
 ];
 
 export default function DashboardLayout() {
@@ -83,6 +88,10 @@ export default function DashboardLayout() {
               <SidebarGroup>
                 <SidebarGroupLabel>Analytics</SidebarGroupLabel>
                 <SidebarGroupContent>{renderMenu(analyticsItems)}</SidebarGroupContent>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Notifications</SidebarGroupLabel>
+                <SidebarGroupContent>{renderMenu(notificationItems)}</SidebarGroupContent>
               </SidebarGroup>
             </SidebarContent>
             <div className="mt-auto p-4 border-t border-sidebar-border">
