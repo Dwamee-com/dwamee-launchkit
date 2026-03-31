@@ -41,6 +41,12 @@ const notificationItems = [
   { title: "Notification Config", url: "/dashboard/notification-config", icon: Settings },
 ];
 
+const operationsItems = [
+  { title: "Shift Management", url: "/dashboard/shifts", icon: Clock },
+  { title: "Messages", url: "/dashboard/messages", icon: MessageSquare },
+  { title: "System Config", url: "/dashboard/system-config", icon: Cog },
+];
+
 export default function DashboardLayout() {
   const navigate = useNavigate();
 
