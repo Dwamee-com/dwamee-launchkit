@@ -31,6 +31,9 @@ import Statistics from "./pages/dashboard/Statistics";
 import EmployeeProfile from "./pages/dashboard/EmployeeProfile";
 import NotificationConfig from "./pages/dashboard/NotificationConfig";
 import Notifications from "./pages/dashboard/Notifications";
+import ShiftManagement from "./pages/dashboard/ShiftManagement";
+import AdminMessages from "./pages/dashboard/AdminMessages";
+import SystemConfig from "./pages/dashboard/SystemConfig";
 
 const queryClient = new QueryClient();
 
