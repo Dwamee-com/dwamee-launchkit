@@ -71,6 +71,9 @@ const App = () => (
             <Route path="employee/:employeeId" element={<EmployeeProfile />} />
             <Route path="notification-config" element={<NotificationConfig />} />
             <Route path="notifications" element={<Notifications />} />
+            <Route path="shifts" element={<ShiftManagement />} />
+            <Route path="messages" element={<AdminMessages />} />
+            <Route path="system-config" element={<SystemConfig />} />
           </Route>
           <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
           <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
