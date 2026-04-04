@@ -77,6 +77,9 @@ const App = () => (
           </Route>
           <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
           <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
+          <Route path="/messages" element={<Navigate to="/dashboard/messages" replace />} />
+          <Route path="/shifts" element={<Navigate to="/dashboard/shifts" replace />} />
+          <Route path="/system-config" element={<Navigate to="/dashboard/system-config" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
