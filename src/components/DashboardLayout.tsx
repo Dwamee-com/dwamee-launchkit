@@ -4,7 +4,7 @@ import {
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User, Bell, Settings, Clock, MessageSquare, Cog } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User, Bell, Settings, Clock, MessageSquare, Cog, HandCoins } from "lucide-react";
 import HelpCenter from "@/components/HelpCenter";
 import OnboardingTour from "@/components/OnboardingTour";
 import { ProjectProvider } from "@/contexts/ProjectContext";
@@ -16,6 +16,7 @@ const managementItems = [
   { title: "Fields", url: "/dashboard/fields", icon: Layers, tour: "fields" },
   { title: "Assignments", url: "/dashboard/assignments", icon: CreditCard },
   { title: "Salaries", url: "/dashboard/salaries", icon: Wallet },
+  { title: "Advances", url: "/dashboard/advances", icon: HandCoins },
   { title: "Daily Report", url: "/dashboard/daily-report", icon: FileBarChart },
 ];
 

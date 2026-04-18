@@ -58,7 +58,8 @@ export function AdvanceProvider({ children }: { children: ReactNode }) {
       prev.map((x) => {
         if (x.id !== id) return x;
         const set = new Set(x.paidInstallments);
-        set.has(index) ? set.delete(index) : set.add(index);
+        if (set.has(index)) set.delete(index);
+        else set.add(index);
         return { ...x, paidInstallments: Array.from(set).sort((a, b) => a - b) };
       })
     );

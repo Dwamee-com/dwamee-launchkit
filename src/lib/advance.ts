@@ -24,7 +24,7 @@ export function addMonthsISO(iso: string, months: number) {
   return d.toISOString().slice(0, 10);
 }
 
-export function buildPreviewSchedule(total: number, months: number, monthly: number, startDate: string) {
+export function buildPreviewSchedule(total: number, months: number, monthly: number, _startDate: string) {
   if (months <= 0) return [];
   const items: { index: number; amount: number }[] = [];
   let remaining = total;

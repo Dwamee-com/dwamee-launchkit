@@ -34,11 +34,16 @@ import Notifications from "./pages/dashboard/Notifications";
 import ShiftManagement from "./pages/dashboard/ShiftManagement";
 import AdminMessages from "./pages/dashboard/AdminMessages";
 import SystemConfig from "./pages/dashboard/SystemConfig";
+import Advances from "./pages/dashboard/Advances";
+import AdvanceForm from "./pages/dashboard/AdvanceForm";
+import AdvanceDetails from "./pages/dashboard/AdvanceDetails";
+import { AdvanceProvider } from "./contexts/AdvanceContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <AdvanceProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -74,6 +79,10 @@ const App = () => (
             <Route path="shifts" element={<ShiftManagement />} />
             <Route path="messages" element={<AdminMessages />} />
             <Route path="system-config" element={<SystemConfig />} />
+            <Route path="advances" element={<Advances />} />
+            <Route path="advances/new" element={<AdvanceForm />} />
+            <Route path="advances/:id" element={<AdvanceDetails />} />
+            <Route path="advances/:id/edit" element={<AdvanceForm />} />
           </Route>
           <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
           <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
@@ -84,6 +93,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </AdvanceProvider>
   </QueryClientProvider>
 );
 
