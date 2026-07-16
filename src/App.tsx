@@ -37,7 +37,11 @@ import SystemConfig from "./pages/dashboard/SystemConfig";
 import Advances from "./pages/dashboard/Advances";
 import AdvanceForm from "./pages/dashboard/AdvanceForm";
 import AdvanceDetails from "./pages/dashboard/AdvanceDetails";
+import Visits from "./pages/dashboard/Visits";
+import CustomAttributes from "./pages/dashboard/CustomAttributes";
+import Users from "./pages/dashboard/Users";
 import { AdvanceProvider } from "./contexts/AdvanceContext";
+import { AttributesProvider } from "./contexts/AttributesContext";
 
 const queryClient = new QueryClient();
 
