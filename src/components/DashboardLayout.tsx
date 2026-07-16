@@ -4,7 +4,7 @@ import {
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
-import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User, Bell, Settings, Clock, MessageSquare, Cog, HandCoins } from "lucide-react";
+import { GitBranch, MapPin, Users, Layers, CreditCard, Wallet, FileBarChart, LogOut, FolderKanban, LayoutGrid, Activity, CalendarDays, ClipboardList, UserCheck, BarChart3, User, Bell, Settings, Clock, MessageSquare, Cog, HandCoins, Route, SlidersHorizontal, UsersRound } from "lucide-react";
 import HelpCenter from "@/components/HelpCenter";
 import OnboardingTour from "@/components/OnboardingTour";
 import { ProjectProvider } from "@/contexts/ProjectContext";
@@ -34,7 +34,13 @@ const leaveItems = [
 
 const analyticsItems = [
   { title: "Statistics", url: "/dashboard/statistics", icon: BarChart3 },
+  { title: "Users", url: "/dashboard/users", icon: UsersRound },
   { title: "Employee Profile", url: "/dashboard/employee/1", icon: User },
+  { title: "Visits", url: "/dashboard/visits", icon: Route },
+];
+
+const adminItems = [
+  { title: "Custom Attributes", url: "/dashboard/custom-attributes", icon: SlidersHorizontal },
 ];
 
 const notificationItems = [
