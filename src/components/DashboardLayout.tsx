@@ -110,6 +110,10 @@ export default function DashboardLayout() {
                 <SidebarGroupLabel>Operations</SidebarGroupLabel>
                 <SidebarGroupContent>{renderMenu(operationsItems)}</SidebarGroupContent>
               </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>Admin</SidebarGroupLabel>
+                <SidebarGroupContent>{renderMenu(adminItems)}</SidebarGroupContent>
+              </SidebarGroup>
             </SidebarContent>
             <div className="mt-auto p-4 border-t border-sidebar-border">
               <button onClick={() => navigate("/login")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">
