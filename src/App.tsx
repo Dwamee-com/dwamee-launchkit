@@ -101,6 +101,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </AttributesProvider>
     </AdvanceProvider>
   </QueryClientProvider>
 );
