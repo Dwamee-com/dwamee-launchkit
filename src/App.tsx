@@ -37,13 +37,18 @@ import SystemConfig from "./pages/dashboard/SystemConfig";
 import Advances from "./pages/dashboard/Advances";
 import AdvanceForm from "./pages/dashboard/AdvanceForm";
 import AdvanceDetails from "./pages/dashboard/AdvanceDetails";
+import Visits from "./pages/dashboard/Visits";
+import CustomAttributes from "./pages/dashboard/CustomAttributes";
+import Users from "./pages/dashboard/Users";
 import { AdvanceProvider } from "./contexts/AdvanceContext";
+import { AttributesProvider } from "./contexts/AttributesContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AdvanceProvider>
+    <AttributesProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -83,6 +88,9 @@ const App = () => (
             <Route path="advances/new" element={<AdvanceForm />} />
             <Route path="advances/:id" element={<AdvanceDetails />} />
             <Route path="advances/:id/edit" element={<AdvanceForm />} />
+            <Route path="visits" element={<Visits />} />
+            <Route path="custom-attributes" element={<CustomAttributes />} />
+            <Route path="users" element={<Users />} />
           </Route>
           <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
           <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
@@ -93,6 +101,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </AttributesProvider>
     </AdvanceProvider>
   </QueryClientProvider>
 );
