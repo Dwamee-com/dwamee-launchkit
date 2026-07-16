@@ -48,6 +48,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AdvanceProvider>
+    <AttributesProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -87,6 +88,9 @@ const App = () => (
             <Route path="advances/new" element={<AdvanceForm />} />
             <Route path="advances/:id" element={<AdvanceDetails />} />
             <Route path="advances/:id/edit" element={<AdvanceForm />} />
+            <Route path="visits" element={<Visits />} />
+            <Route path="custom-attributes" element={<CustomAttributes />} />
+            <Route path="users" element={<Users />} />
           </Route>
           <Route path="/notifications" element={<Navigate to="/dashboard/notifications" replace />} />
           <Route path="/notification-config" element={<Navigate to="/dashboard/notification-config" replace />} />
